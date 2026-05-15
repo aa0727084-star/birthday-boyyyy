@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memory Gallery ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-y: auto; /* السماح بالتمرير لأسفل لرؤية باقي الصور */
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 50px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* حاوية المعرض كروت تحت بعض أو جمب بعض بشكل متناسق */
+        .gallery-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* المسافة بين كل ذكرى والثانية */
+        }
+
+        /* كارت الذكرى الواحدة */
+        .memory-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        /* حاوية الصورة للتأكد من أبعادها وثباتها */
+        .image-wrapper {
+            width: 100%;
+            max-height: 450px;
+            overflow: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* تخلي الصورة تملى المربع بشكل شيك ومن غير ما تمط */
+        }
+
+        /* حاوية الكلام تحت الصورة */
+        .text-wrapper {
+            padding: 25px;
+            text-align: right; /* محاذاة الكلام لليمين لأنه عربي */
+            direction: rtl; /* اتجاه الكتابة عربي */
+        }
+
+        .memory-number {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .memory-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-weight: 400;
+        }
+
+        /* زرار ينقله للصفحة اللي بعدها (لو عندك صفحة تانية زي الـ End أو الفيديو) */
+        .next-page-btn {
+            margin-top: 50px;
+            padding: 14px 50px;
+            background: linear-gradient(45deg, #d4af37, #b8962e);
+            color: #0e0e0e;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .next-page-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Gallery</h1>
+    <p class="subtitle">Beautiful snapshots of our beautiful times</p>
+
+    <div class="gallery-container">
+
+        <div class="memory-card">
+            <div class="image-wrapper">
+                <img src="1.jpg" alt="Memory 1">
+            </div>
+            <div class="text-wrapper">
+                <span class="memory-number">#1</span>
+                <p class="memory-text">عيد ميلادك اللي فات كنت بحاول من قبلها بشهرين اعملك مفاجاه 😂كنت خايفه متظبطش بس ظبطت الحمدلله 🫣😂بحب اليوم دا من كل سنه يوم اتولد فيه اهم واحسن واحلي واجدع واشطر واجمل ولد في الدنيا والله♥️بحبحاول كل سنه اخلي اليوم مميز عن السنه اللي قبلها ويارب اكون بعرف انجح في دا♥️🥰</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <div class="image-wrapper">
+                <img src="2.jpg" alt="Memory 2">
+            </div>
+            <div class="text-wrapper">
+                <span class="memory-number">#2</span>
+                <p class="memory-text">عيد ميلادي انا اللي فات بس بحب اليوم دا اوي♥️كنت قافشه المفاجاه اه بس كنت مبسوطه انك حاولت تفاجاني😂♥️بحب اليوم دا بكل حاجه حصلت فيه وبحبك انت اوي ربنا يخليك ليا ي نور عيوني♥️</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <div class="image-wrapper">
+                <img src="3.jpg" alt="Memory 3">
+            </div>
+            <div class="text-wrapper">
+                <span class="memory-number">#3</span>
+                <p class="memory-text">تاني يوم شغل تقريبا😂 كنت مبسوطه اني معاك وبشاركك بحبك اوي اوي وبحب كل حاجه انت فيها بتبقي أحلي والله 😭♥️♥️♥️♥️♥️</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <div class="image-wrapper">
+                <img src="4.jpg" alt="Memory 4">
+            </div>
+            <div class="text-wrapper">
+                <span class="memory-number">#4</span>
+                <p class="memory-text">اول يوم ننزل فيه سوا♥️ كنت مبسوطه اوي كنت طايره حرفيا وانت طنت جميل اوي شكلك حلو وكل حاجه كانت حلوه♥️كنت بتخليني اجرب اي حاجه مجربتهاش قبل كده تقريبا😂♥️بحبك ي ابو ليلي♥️</p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <div class="image-wrapper">
+                <img src="5.jpg" alt="Memory 5">
+            </div>
+            <div class="text-wrapper">
+                <span class="memory-number">#5</span>
+                <p class="memory-text">اول مره نفطر سوا في رمضان♥️ كنت متحمسه لليوم دا جدا بجد♥️ كالعاده جيت متاخر وفطرنا ع العشاء تقريبا 😂وجيت لقيتك جيايبلي اول هديه جبتهالي اللي عاجبني انك فكرت ف حاجه انا قولتها ف نص الكلام ودا اكتر حاجه بحبها♥️وروحت معايا اليوم كان تحفه تحفه بجد♥️</p>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="special.html" class="next-page-btn">يلا ي توتي نكمل🎁</a>
+
+    <script>
+        function createGalleryStar() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 12 + 8 + 'px';
+            star.style.color = '#d4af37';
+            star.style.opacity = Math.random();
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.style.opacity = '0';
+                setTimeout(() => star.remove(), 2000);
+            }, 3000);
+        }
+        setInterval(createGalleryStar, 400);
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

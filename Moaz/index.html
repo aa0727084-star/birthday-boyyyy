@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story Begins</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Our Journey ❤️</h1>
+        <p>Every love story is beautiful, but ours is my favorite.</p>
+        
+        <a href="intro.html" class="journey-btn">Start Journey 🚀</a>
+    </div>
+
+    <script src="script.js"></script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

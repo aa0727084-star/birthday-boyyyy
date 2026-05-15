@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Maaz 🎂✨</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* حاوية التهنئة الختامية */
+        .final-container {
+            text-align: center;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 50px 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            width: 100%;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.2); }
+            to { text-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 0 35px rgba(212, 175, 55, 0.4); }
+        }
+
+        .final-subtitle {
+            font-size: 1.3rem;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* أيقونة التورتة والاحتفال الكبير */
+        .cake-icon {
+            font-size: 6rem;
+            color: #ff4d4d;
+            filter: drop-shadow(0 0 20px rgba(255, 77, 77, 0.5));
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* زرار الرجوع النهائي للبداية خالص لو حابب يعيد الموقع */
+        .restart-all-btn {
+            padding: 12px 35px;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .restart-all-btn:hover {
+            background: linear-gradient(45deg, #d4af37, #b8962e);
+            color: #0e0e0e;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* عناصر الاحتفال المتساقطة */
+        .celebration-element {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="final-container">
+        <div class="cake-icon">
+            <i class="fa-solid fa-cake-candles"></i>
+        </div>
+        
+        <h1>Happy Birthday Moaz!</h1>
+        <p class="final-subtitle">كل سنة وأنت منور دنيتي يا حبيب عمري كله.. ويا رب دايماً مع بعض والسنه الجايه نكون مخطوبين بقي ي لولي ! 🎂❤️✨</p>
+        
+        <a href="intro.html" class="restart-all-btn">
+            <i class="fa-solid fa-heart"></i> لو عايز تعيد تاني يلا بينا
+        </a>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const elements = ['🎉', '🎈', '❤️', '✨', '🎂', '💖', '🥳', '🎁'];
+            
+            // توليد 120 عنصر احتفالي ينزلوا بشكل عشوائي ومبهج جداً
+            for (let i = 0; i < 120; i++) {
+                setTimeout(() => {
+                    const item = document.createElement('div');
+                    item.className = 'celebration-element';
+                    item.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                    
+                    item.style.left = Math.random() * 100 + 'vw';
+                    item.style.fontSize = Math.random() * 30 + 15 + 'px';
+                    
+                    const duration = Math.random() * 3 + 2.5; 
+                    item.style.animationDuration = duration + 's';
+                    item.style.opacity = Math.random() * 0.9 + 0.1;
+
+                    document.body.appendChild(item);
+
+                    setTimeout(() => { item.remove(); }, duration * 1000);
+                }, i * 80); // سرعة تتابع ممتازة تملى الشاشة كرنفال كامل
+            }
+        };
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Whole Life ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* حاوية الجواب السحري */
+        .envelope-container {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            max-width: 450px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: transform 0.4s ease;
+        }
+
+        /* شكل الجواب الخارجي المغلق */
+        .envelope {
+            width: 100%;
+            height: 220px;
+            background: rgba(212, 175, 55, 0.05);
+            border: 2px dashed #d4af37;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .envelope i {
+            font-size: 4.5rem;
+            color: #d4af37;
+            animation: pulse 2s infinite;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+        }
+
+        .envelope p {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); color: #ff4d4d; filter: drop-shadow(0 0 15px rgba(255, 77, 77, 0.5)); }
+        }
+
+        /* كارت الرسالة المخفي اللي هيطلع من الجواب */
+        .letter-card {
+            position: absolute;
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            transform: scale(0.7) translateY(50px);
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 105;
+        }
+
+        /* ستايل نصوص الرسالة الرومانسية */
+        .letter-card p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: 500;
+        }
+
+        .letter-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* التأثير السحري عند فتح الجواب واختفاء الغلاف */
+        .envelope-container.open .envelope {
+            opacity: 0;
+            transform: scale(0.5);
+            visibility: hidden;
+        }
+
+        .envelope-container.open .letter-card {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            visibility: visible;
+        }
+        /* مطر القلوب */
+        .heart-rain {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-container" id="letterContainer">
+        
+        <div class="envelope" id="envelopeGrave">
+            <i class="fa-solid fa-envelope-heart"></i>
+            <p>دوس في حاجه تحفه مستنياك✉️❤️</p>
+        </div>
+
+        <div class="letter-card">
+            <p>كل سنه وأنت طيب يحبيب عمري وأيامي ♥️</p>
+            <p>كل سنه وأنت سندي وقت ما بحتاجك و راحتي وروحي التانيه 🥹</p>
+            <p>مفيش كلام اوصف بيه علاقتنا بس من يوم م عرفتك وانت سري وأماني وأهلي وكل صحابي ♥️</p>
+            <p>ربنا رزقني وعوضني براجل حبني من كل قلبه وحنين عليا كأني بنته ♥️😭</p>
+            <p>مهما أتكلمت مش هوفيك حقك ابدا ولا اللي بتعمله معايا وعشاني ♥️</p>
+            <p>ربنا يخليك لي أحسن واحد ف الدنيا وتحقق كل اللي بتمتناه ويجمعنا سوا في بيت واحد يارب ♥️😭</p>
+            <div style="text-align: center; margin-top: 25px;">
+    <a href="video.html" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 25px;
+        background: transparent;
+        color: #ff4d4d;
+        border: 2px solid #ff4d4d;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
+    " onmouseover="this.style.background='linear-gradient(45deg, #ff4d4d, #cc3333)'; this.style.color='#0e0e0e'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='transparent'; this.style.color='#ff4d4d'; this.style.transform='scale(1)';">
+        قربنا ي لولي خلاص🎬❤️
+    </a>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('letterContainer').onclick = function() {
+            // تفعيل كلاس الفتح لتبديل الجواب بالرسالة
+            this.classList.add('open');
+
+            // إطلاق مطر غزير من القلوب الحمراء والذهبية كاحتفال بالرسالة
+            const hearts = ['❤️', '💖', '💝', '✨', '💕'];
+            for (let i = 0; i < 70; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-rain';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                    
+                    const duration = Math.random() * 3 + 2; 
+                    heart.style.animationDuration = duration + 's';
+                    heart.style.opacity = Math.random();
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => { heart.remove(); }, duration * 1000);
+                }, i * 120);
+            }
+        };
+
+        // نجوم خفيفة في الخلفية من البداية
+        function createBackgroundStars() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 10 + 5 + 'px';
+            star.style.color = 'rgba(212, 175, 55, 0.3)';
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+            document.body.appendChild(star);
+            setTimeout(() => { star.style.opacity = '0'; setTimeout(() => star.remove(), 2000); }, 3000);
+        }
+        setInterval(createBackgroundStars, 500);
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

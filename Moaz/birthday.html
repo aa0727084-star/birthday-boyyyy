@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ستايل مستقل تماماً ومقاوم لأي تهنيج */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .birthday-card {
+            text-align: center;
+            position: relative !important;
+            z-index: 99999 !important; /* فوق أي نجوم */
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* حاوية الأزرار المستقلة */
+        .buttons-container {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            min-height: 100px;
+        }
+
+        /* أزرار جديدة بأسماء كلاسات فريدة عشان الـ CSS القديم ميبوظهاش */
+        .b-btn {
+            display: inline-block;
+            padding: 14px 45px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .b-btn-yes {
+            background: linear-gradient(45deg, #d4af37, #b8962e) !important;
+            color: #0e0e0e !important;
+            border: none !important;
+            cursor: pointer !important;
+        }
+
+        .b-btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .b-btn-no {
+            background: transparent !important;
+            color: #d4af37 !important;
+            border: 2px solid #d4af37 !important;
+            cursor: pointer !important;
+            /* تنعيم الهروب */
+            transition: left 0.1s ease-out, top 0.1s ease-out !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="birthday-card">
+        <h1>Happy Birthday</h1>
+        <h2>My Love</h2>
+        <p class="question">Are you excited to see what I have prepared for you?!</p>
+        
+        <div class="buttons-container">
+            <button class="b-btn b-btn-yes" id="true-yes-btn">YES!!!</button>
+            <button class="b-btn b-btn-no" id="true-no-btn">NOOOO!!</button>
+        </div>
+    </div>
+
+    <script>
+        // دالة تشغيل الأزرار والنجوم محلياً وجوّه الصفحة فوراً
+        document.addEventListener("DOMContentLoaded", function() {
+            const yesBtn = document.getElementById('true-yes-btn');
+            const noBtn = document.getElementById('true-no-btn');
+
+            // 1. تشغيل زرار YES المضمون
+            if (yesBtn) {
+                yesBtn.onclick = function() {
+                    window.location.href = "gallery.html"; // هينقل فوراً لصفحة المعرض
+                };
+            }
+            // 2. تشغيل هروب زرار NO الصاروخي
+            if (noBtn) {
+                noBtn.onmouseover = flyAway;
+                noBtn.ontouchstart = flyAway; // للموبايل باللمس
+                noBtn.onclick = flyAway;      // لو حاول يضغط بسرعة
+
+                function flyAway(e) {
+                    if(e) e.preventDefault();
+                    // حساب أبعاد عشوائية تضمن بقاء الزرار جوة الشاشة بس بيطير
+                    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100);
+                    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100);
+                    
+                    noBtn.style.position = 'fixed'; 
+                    noBtn.style.left = x + 'px';
+                    noBtn.style.top = y + 'px';
+                }
+            }
+
+            // 3. تأثير نجوم خاص بالصفحة دي لوحدها عشان نضمن إن مفيش حاجة تحجب الأزرار
+            function createLocalStar() {
+                const star = document.createElement('div');
+                star.innerHTML = '✨';
+                star.style.position = 'fixed';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.fontSize = Math.random() * 12 + 8 + 'px';
+                star.style.color = '#d4af37';
+                star.style.opacity = Math.random();
+                star.style.pointerEvents = 'none'; // الماوس يخترق النجمة تماماً
+                star.style.zIndex = '1'; // النجوم في الخلفية
+                star.style.transition = 'opacity 2s';
+
+                document.body.appendChild(star);
+
+                setTimeout(() => {
+                    star.style.opacity = '0';
+                    setTimeout(() => star.remove(), 2000);
+                }, 3000);
+            }
+            setInterval(createLocalStar, 400);
+        });
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

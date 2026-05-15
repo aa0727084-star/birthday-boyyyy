@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Moaz</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* ستايل خاص بخانة الكتابة لصفحة الباسورد فقط */
+        input {
+            padding: 12px 20px;
+            background: #222;
+            border: 1px solid #d4af37;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            width: 100%;
+            max-width: 280px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input:focus {
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h1>Hi LOLO 👋</h1>
+        <p>To Enter, Type our special date 🔒</p>
+        
+        <input type="password" id="passwordInput" placeholder="فكر ي لولو يوم مهم لينا">
+        
+        <button onclick="localCheckPassword()">Login</button>
+        
+        <div id="error-msg" style="display: none; color: #ff4d4d; margin-top: 15px; font-weight: bold;">ركز ي لولو 😂</div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        function localCheckPassword() {
+            const inputField = document.getElementById('passwordInput');
+            const errorMsg = document.getElementById('error-msg');
+            
+            if (inputField) {
+                const password = inputField.value.trim();
+                
+                // الباسورد الخاص بكم للانتقال لصفحة العيد ميلاد
+                if (password === "10/1/2024") {
+                    if (errorMsg) errorMsg.style.display = 'none';
+                    window.location.href = "birthday.html"; 
+                } else {
+                    if (errorMsg) {
+                        errorMsg.style.display = 'block';
+                    }
+                }
+            }
+        }
+        
+        // تفعيل زر الإدخال (Enter) من الكيبورد لتسهيل الدخول
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                localCheckPassword();
+            }
+        });
+    </script>
+    <audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>
