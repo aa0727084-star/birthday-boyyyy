@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px; /* تقليل الحشو العلوي */
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 2.8rem; /* صغرنا حجم العنوان شوية */
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 35px; /* تقليل المسافة */
+            text-align: center;
+        }
+
+        /* تصغير حجم حاوية الميديا الكلية عشان متبقاش عريضة */
+        .media-container {
+            width: 100%;
+            max-width: 500px; /* صغرنا العرض من 750 لـ 500 عشان يتلم */
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* تقليل المسافات بين الكروت */
+            position: relative;
+            z-index: 100;
+        }
+
+        /* كارت الميديا المتناسق الصغير */
+        .media-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 15px; /* حواف أنعم للكروت الصغيرة */
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        /* التحكم الصارم في أبعاد الفيديو والصورة عشان يبانوا كاملين */
+        .media-card video, .media-card img {
+            width: 100%;
+            height: auto;
+            max-height: 320px; /* قفلنا الارتفاع الأقصى عند 320 بكسل عشان ميمطش ويفرش في الشاشة */
+            object-fit: contain; /* خليناها contain عشان الصورة والفيديو يظهروا كاملين بدون أي قص للحواف */
+            background-color: #000; /* خلفية سوداء تملى الفراغات لو الأبعاد مختلفة */
+            display: block;
+        }
+
+        /* تسمية خفيفة وأصغر تحت الميديا */
+        .media-caption {
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #d4af37;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        /* زرار العودة */
+        .back-btn {
+            margin-top: 35px;
+            padding: 10px 30px;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, #d4af37, #b8962e);
+            color: #0e0e0e;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Memories</h1>
+    <p class="subtitle">our memories🎬✨</p>
+
+    <div class="media-container">
+
+        <div class="media-card">
+            <video controls>
+                <source src="video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="media-caption">i love you 🎥</div>
+        </div>
+
+        <div class="media-card">
+            <img src="pic1.jpg" alt="Our Special Picture">
+            <div class="media-caption">you are my favorite person 📸</div>
+        </div>
+
+        <div class="media-card">
+            <video controls>
+                <source src="video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="media-caption">bestiii 🎞️</div>
+        </div>
+
+    </div>
+
+    <a href="special.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> ارجع لسه بدري ي لولي
+    </a>
+
+    <script>
+        function createMemoriesStar() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 12 + 8 + 'px';
+            star.style.color = '#d4af37';
+            star.style.opacity = Math.random();
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.style.opacity = '0';
+                setTimeout(() => star.remove(), 2000);
+            }, 3000);
+        }
+        setInterval(createMemoriesStar, 400);
+    </script>
+<audio id="globalBgMusic" loop>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const audio = document.getElementById('globalBgMusic');
+            const myVideo = document.querySelector('video'); // بيلقط الفيديو تلقائيًا
+
+            // استرجاع الوقت من الصفحة السابقة
+            const savedTime = localStorage.getItem('bgMusicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            // تشغيل الأغنية مع أول ضغطة في الصفحة
+            document.body.addEventListener('click', function() {
+                if (audio.paused && myVideo.paused) {
+                    audio.play().catch(e => {});
+                }
+            }, { once: true });
+
+            audio.play().catch(e => {});
+
+            // لو معاذ شغل الفيديو -> الأغنية تقف
+            myVideo.onplay = function() {
+                audio.pause();
+                localStorage.setItem('bgMusicState', 'paused_by_video');
+            };
+
+            // لو وقف الفيديو أو خلص -> الأغنية ترجع تشتغل
+            myVideo.onpause = function() {
+                audio.play();
+                localStorage.setItem('bgMusicState', 'playing');
+            };
+
+            myVideo.onended = function() {
+                audio.play();
+                localStorage.setItem('bgMusicState', 'playing');
+            };
+
+            // تحديث وقت الأغنية المستمر عشان الصفحات التانية تعرفه
+            setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem('bgMusicTime', audio.currentTime);
+                }
+            }, 1000);
+
+            window.addEventListener('beforeunload', () => {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+            });
+        });
+    </script>
+
+</body>
+</html>
+</body>
+</html>

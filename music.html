@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Song 🎵</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        /* حاوية كارت كاسيت الموسيقى الفخم */
+        .music-player-container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* صورة أو أيقونة متحركة تعبر عن الموسيقى */
+        .disc-icon {
+            font-size: 5rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+            animation: spin 4s linear infinite; /* بتلف زي الاسطوانة */
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .song-title {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* تظبيط شكل مشغل الصوت الافتراضي عشان يليق بالتصميم */
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 30px;
+            background: #d4af37; /* يدي لمسة ذهبية للمشغل */
+        }
+
+        /* زرار العودة */
+        .back-btn {
+            margin-top: 35px;
+            padding: 10px 30px;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, #d4af37, #b8962e);
+            color: #0e0e0e;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Our Song</h1>
+    <p class="subtitle">كل كلمه في الاغنيه دي عاوزه اقولهالك🎶❤️</p>
+
+    <div class="music-player-container">
+        <i class="fa-solid fa-compact-disc disc-icon"></i>
+        
+        <div class="song-title">مي عبد العزيز - أنا وأنت 🎵</div>
+
+        <audio controls autoplay>
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <a href="special.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> يلا ي لولي نكمل
+    </a>
+
+    <script>
+        function createMusicStar() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 12 + 8 + 'px';
+            star.style.color = '#d4af37';
+            star.style.opacity = Math.random();
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+            document.body.appendChild(star);
+            setTimeout(() => { star.style.opacity = '0'; setTimeout(() => star.remove(), 2000); }, 3000);
+        }
+        setInterval(createMusicStar, 400);
+    </script>
+<audio id="globalBgMusic" loop>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // أول ما يدخل هنا.. هنوقف تماماً أغنية الخلفية الموحدة عشان ما تعملش شوشرة
+        localStorage.setItem('bgMusicState', 'paused_by_page');
+        
+        // هنا الكود الأساسي لتشغيل الأغنية الـ MP3 الخاصة بالصفحة دي:
+        const mainAudio = document.querySelector('audio'); // بيلقط الأغنية الأساسية في الصفحة
+        
+        if(mainAudio) {
+            // تشغيل الأغنية الأساسية للملف عند التفاعل
+            document.body.addEventListener('click', function() {
+                mainAudio.play().catch(e => {});
+            }, { once: true });
+        }
+    });
+</script>
+
+</body>
+</html>
+</body>
+</html>

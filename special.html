@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something Special ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* شبكة القلوب (4 أعمدة في الكمبيوتر، ويهدوا تحت بعض في الموبايل) */
+        .hearts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* كارت القلب الواحدة */
+        .heart-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none; /* إلغاء الخط تحت الكلام */
+        }
+
+        /* تأثير الحركة والنور عند الوقوف على القلب */
+        .heart-card:hover {
+            transform: translateY(-15px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        /* ستايل أيقونة القلب */
+        .heart-card i {
+            color: #d4af37;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+
+        .heart-card:hover i {
+            transform: scale(1.2);
+            color: #ff4d4d; /* يقلب أحمر دافئ لما يقف عليه كحركة صايعة */
+            filter: drop-shadow(0 0 15px rgba(255, 77, 77, 0.6));
+        }
+
+        /* اسم التبويب تحت القلب */
+        .heart-title {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* الموبايل: القلوب تترتب اتنين اتنين عشان الشاشة متبقاش ضيقة */
+        @media (max-width: 768px) {
+            .hearts-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>For You, Moaz ❤️</h1>
+    <p class="subtitle">كل قلب وراه مفاجأة مستنياك.. اختر قلب وافتحه</p>
+
+    <div class="hearts-grid">
+
+        <a href="memories.html" class="heart-card">
+            <i class="fa-solid fa-heart"></i>
+            <div class="heart-title">memories🎬</div>
+        </a>
+
+        <a href="letterpage.html" class="heart-card">
+            <i class="fa-solid fa-heart"></i>
+            <div class="heart-title">letter for you ✉️</div>
+        </a>
+        <a href="music.html" class="heart-card">
+            <i class="fa-solid fa-heart"></i>
+            <div class="heart-title">Our Song 🎵</div>
+        </a>
+
+        <a href="surprise.html" class="heart-card">
+            <i class="fa-solid fa-heart"></i>
+            <div class="heart-title">Surprise 🎁</div>
+        </a>
+
+    </div>
+
+    <script>
+        function createSpecialStar() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 12 + 8 + 'px';
+            star.style.color = '#d4af37';
+            star.style.opacity = Math.random();
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.style.opacity = '0';
+                setTimeout(() => star.remove(), 2000);
+            }, 3000);
+        }
+        setInterval(createSpecialStar, 400);
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

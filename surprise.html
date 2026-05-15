@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Surprise Memories ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d4af37;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* شبكة الصور الذكية المتناسقة */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* كارت الصورة */
+        .gallery-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        /* حاوية الصورة لتثبيت المقاس وضمان عدم التمدد أو التشوّه */
+        .image-wrapper {
+            width: 100%;
+            height: 250px; 
+            background-color: #000;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover .image-wrapper img {
+            transform: scale(1.08);
+        }
+
+        /* عنوان اللحظة تحت كل صورة */
+        .image-caption {
+            padding: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: bold;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* زرار العودة */
+        .back-btn-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .back-btn {
+            padding: 12px 40px;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 100;
+        }
+        .back-btn:hover {
+            background: linear-gradient(45deg, #d4af37, #b8962e);
+            color: #0e0e0e;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* نافذة التكبير السحرية (Lightbox) */
+        #galleryOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            cursor: zoom-out;
+            padding: 20px;
+        }
+
+        #galleryOverlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #expandedImg {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            cursor: default;
+        }
+
+        #galleryOverlay.active #expandedImg {
+            transform: scale(1);
+        }
+
+        #overlayCaption {
+            color: #d4af37;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #closeGalleryBtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #d4af37;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10000;
+        }
+        #closeGalleryBtn:hover { color: #ff4d4d; }
+    </style>
+</head>
+<body>
+
+    <h1>Our Golden Moments</h1>
+    <p class="subtitle">كل خطوة، كل ضحكة، وكل أول مرة وثقناها سوا 🎞️❤️</p>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic2.jpg" alt="1 أول حاجة تجبهالي خالص 🥹♥️"></div>
+            <div class="image-caption">1 أول حاجة تجبهالي خالص 🥹♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic3.jpg" alt="2 أول فيديو كول📷♥️"></div>
+            <div class="image-caption">2 أول فيديو كول📷♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic4.jpg" alt="3 أول مرة نقعد سوا👩🏻‍🤝‍👨ِ"></div>
+            <div class="image-caption">3 أول مرة نقعد سوا👩🏻‍🤝‍👨🏻</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic5.jpg" alt="4 أول مرة نلعب دومينو سوا🫣"></div>
+            <div class="image-caption">4 أول مرة نلعب دومينو سوا🫣</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic6.jpg" alt="5 أول خروجة♥️🥰"></div>
+            <div class="image-caption">5 أول خروجة♥️🥰</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic7.jpg" alt="6 أول مرة نفطر سوا في رمضان🥰"></div>
+            <div class="image-caption">6 أول مرة نفطر سوا في رمضان🥰</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic8.jpg" alt="7 أول هدية تجبهالي😭🎁"></div>
+            <div class="image-caption">7 أول هدية تجبهالي😭🎁</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic9.jpg" alt="8 أول مرة تجبلي صواريخ ف رمضان 🎇♥️"></div>
+            <div class="image-caption">8 أول مرة تجبلي صواريخ ف رمضان 🎇♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic10.jpg" alt="9 أول عيدية♥️💸"></div>
+            <div class="image-caption">9 أول عيدية♥️💸</div>
+        </div>
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic11.jpg" alt="10 أول خروجة نخرجها بعد العيد🎀♥️"></div>
+            <div class="image-caption">10 أول خروجة نخرجها بعد العيد🎀♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic12.jpg" alt="11 أول مرة ندخل السينما♥️🎞️"></div>
+            <div class="image-caption">11 أول مرة ندخل السينما♥️🎞️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic13.jpg" alt="12 أول مرة تاخد رأيي ف هدوم 👕👩🏻‍❤️‍👨🏻"></div>
+            <div class="image-caption">12 أول مرة تاخد رأيي ف هدوم 👕👩🏻‍❤️‍👨🏻</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic14.jpg" alt="13 أول مج قهوة أجبهولك☕🤎"></div>
+            <div class="image-caption">13 أول مج قهوة أجبهولك☕🤎</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic15.jpg" alt="14 أول صورة ليا ف محفظتك👝♥️"></div>
+            <div class="image-caption">14 أول صورة ليا ف محفظتك👝♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic16.jpg" alt="15 أول عضة😂🫣"></div>
+            <div class="image-caption">15 أول عضة😂🫣</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic17.jpg" alt="16 أول خروجة لعيد ميلادي♥️🎊🎈"></div>
+            <div class="image-caption">16 أول خروجة لعيد ميلادي♥️🎊🎈</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic18.jpg" alt="17 أول مرة نلون سوا🖌️♥️"></div>
+            <div class="image-caption">17 أول مرة نلون سوا🖌️♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic19.jpg" alt="18 أول مرة نروح ال gravity سوا👩🏻‍🤝‍👨🏻♥️"></div>
+            <div class="image-caption">18 أول مرة نروح ال gravity سوا👩🏻‍🤝‍👨🏻♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic20.jpg" alt="19 أول مرة نجيب حاجة رمضان لحد من أهلنا♥️👩🏻‍❤️‍👨🏻"></div>
+            <div class="image-caption">19 أول مرة نجيب حاجة رمضان لحد من أهلنا♥️👩🏻‍❤️‍👨🏻</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic21.jpg" alt="20 أول مرة نلعب بازل سوا🧩♥️"></div>
+            <div class="image-caption">20 أول مرة نلعب بازل سوا🧩♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic22.jpg" alt="21 أول خروجة نخرجها أول يوم عيد♥️"></div>
+            <div class="image-caption">21 أول خروجة نخرجها أول يوم عيد♥️</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic23.jpg" alt="22 أول مرة نروح القلعة🛕"></div>
+            <div class="image-caption">22 أول مرة نروح القلعة🛕</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic24.jpg" alt="23 أول مرة نروح نعمل تحاليل سوا💉"></div>
+            <div class="image-caption">23 أول مرة نروح نعمل تحاليل سوا💉</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic25.jpg" alt="24 أول مرة نروح فرح سوا♥️👩🏻‍❤️‍👨🏻"></div>
+            <div class="image-caption">24 أول مرة نروح فرح سوا♥️👩🏻‍❤️‍👨🏻</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic26.jpg" alt="25 أول مرة نروح البحر سوا🩵🌊"></div>
+            <div class="image-caption">25 أول مرة نروح البحر سوا🩵🌊</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic27.jpg" alt="26 أول مرة تجبلي ورد💐🩷"></div>
+            <div class="image-caption">26 أول مرة تجبلي ورد💐🩷</div>
+        </div>
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic28.jpg" alt="27 أول مرة نعمل حاجة نشربها ف العربية☕"></div>
+            <div class="image-caption">27 أول مرة نعمل حاجة نشربها ف العربية☕</div>
+        </div>
+
+        <div class="gallery-card">
+            <div class="image-wrapper"><img src="pic29.jpg" alt="28 أول مرة نعمل حاجة ناكلها في العربية🍜"></div>
+            <div class="image-caption">28 أول مرة نعمل حاجة ناكلها في العربية🍜</div>
+        </div>
+
+    </div>
+
+    <div class="back-btn-container">
+        <a href="special.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> ارجع لو عايز
+            <div style="text-align: center; margin-top: 20px;">
+    <a href="end.html" class="back-btn" style="border-color: #ff4d4d; color: #ff4d4d; box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);">
+        كمل يلا ي زوزو🎁❤️
+        </a>
+    </div>
+
+    <div id="galleryOverlay">
+        <span id="closeGalleryBtn">&times;</span>
+        <img id="expandedImg" src="" alt="">
+        <div id="overlayCaption"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.gallery-card');
+            const overlay = document.getElementById('galleryOverlay');
+            const expandedImg = document.getElementById('expandedImg');
+            const overlayCaption = document.getElementById('overlayCaption');
+            const closeBtn = document.getElementById('closeGalleryBtn');
+
+            cards.forEach(card => {
+                const img = card.querySelector('.image-wrapper img');
+                const caption = card.querySelector('.image-caption').innerText;
+
+                card.querySelector('.image-wrapper').onclick = function() {
+                    expandedImg.src = img.src;
+                    overlayCaption.innerText = caption;
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                };
+            });
+
+            closeBtn.onclick = () => closeLightbox();
+            overlay.onclick = (e) => { if (e.target !== expandedImg && e.target !== closeBtn) closeLightbox(); };
+            document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeLightbox(); });
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function createStars() {
+            const star = document.createElement('div');
+            star.innerHTML = '✨';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.fontSize = Math.random() * 12 + 8 + 'px';
+            star.style.color = '#d4af37';
+            star.style.opacity = Math.random();
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.transition = 'opacity 2s';
+            document.body.appendChild(star);
+            setTimeout(() => { star.style.opacity = '0'; setTimeout(() => star.remove(), 2000); }, 3000);
+        }
+        setInterval(createStars, 400);
+    </script>
+<audio id="globalBgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById('globalBgMusic');
+
+        // 1. استرجاع الوقت اللي وقفت عنده الأغنية من الصفحة اللي فاتت
+        const savedTime = localStorage.getItem('bgMusicTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // 2. تشغيل الأغنية عند أول ضغطة للمستخدم في الصفحة لتخطي حماية المتصفح
+        function playAudio() {
+            audio.play().catch(e => console.log("في انتظار تفاعل المستخدم"));
+        }
+        document.body.addEventListener('click', playAudio, { once: true });
+        
+        // محاولة تشغيل تلقائي إذا كان المتصفح يسمح
+        audio.play().catch(e => {});
+
+        // 3. حفظ وقت الأغنية الحالي كل ثانية في ذاكرة المتصفح عشان الصفحة اللي بعدها تقراه
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('bgMusicTime', audio.currentTime);
+                localStorage.setItem('bgMusicState', 'playing');
+            }
+        }, 1000);
+
+        // 4. حفظ الوقت فوراً قبل ما يقفل الصفحة أو يتنقل
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+    });
+</script>
+</body>
+</html>

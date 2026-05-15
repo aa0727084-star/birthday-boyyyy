@@ -1,0 +1,103 @@
+/* ==========================================================================
+   1. التنسيق الأساسي للموقع (تنظيف وتثبيت الخلفية)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0e0e0e; 
+    background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+    color: white;
+    font-family: 'Cairo', 'Poppins', sans-serif;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh !important;
+    text-align: center !important;
+    overflow: hidden !important; 
+    position: relative;
+}
+
+/* ==========================================================================
+   2. الكود السحري: تأمين الطبقات (رفع الكلام والزراير فوق النجوم إجباري)
+   ========================================================================== */
+/* الكود ده بيرفع كل محتويات الصفحات (index, intro, birthday) لأعلى طبقة في المتصفح */
+.container, .login-card, .login-container, .buttons-group, .btn-group, .cake-container {
+    position: relative !important;
+    z-index: 9999999 !important; 
+    pointer-events: auto !important; /* بيسمح باللمس والضغط */
+    animation: none !important; /* تثبيت الكلام ومنع الهز */
+    transform: none !important;
+}
+
+/* تأمين المربعات والزراير جوة الكروت إجباري */
+.container *, .login-card * {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 99999999 !important;
+}
+
+/* إجبار النجوم والـ Particles تطير في الخلفية وماتلمسش الماوس نهائي */
+.particle, div[class*="star"], body > div:not(.container):not(.login-card) {
+    pointer-events: none !important;
+    z-index: -1 !important;
+}
+
+/* ==========================================================================
+   3. التنسيق الموحد للأزرار الفخمة (تحويل السهم لإيد وتفعيل النور)
+   ========================================================================== */
+.journey-btn, button, .btn-yes, .btn-no {
+    display: inline-block !important;
+    padding: 14px 40px !important;
+    background: linear-gradient(45deg, #1a1a1a, #262626) !important;
+    color: #d4af37 !important;
+    border: 2px solid #d4af37 !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important; /* بيجبر السهم يقلب إيد */
+    z-index: 999999999 !important; /* أعلى طبقة ممكنة للزرار */
+    pointer-events: auto !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.journey-btn:hover, button:hover, .btn-yes:hover {
+    background: #d4af37 !important;
+    color: #0e0e0e !important;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* تنسيق خانة الكتابة (الباسورد) */
+input {
+    padding: 12px 20px;
+    background: #222;
+    border: 1px solid #d4af37;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-align: center;
+    pointer-events: auto !important;
+    z-index: 999999999 !important;
+}
+
+/* ==========================================================================
+   4. تنسيق خاص بصفحة التورتة (الهروب لزرار NO)
+   ========================================================================== */
+.buttons-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#runaway-btn {
+    transition: left 0.15s ease, top 0.15s ease !important;
+}
